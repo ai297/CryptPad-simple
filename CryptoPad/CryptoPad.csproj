@@ -10,10 +10,13 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <Authors>Kris Casper</Authors>
     <Company>AI297</Company>
-    <Description>Simple text editor with password protection for files</Description>
+    <Description>Simple text editor for Windows like Notepad with encription</Description>
     <Copyright>Kris Casper 2020</Copyright>
     <Win32Resource></Win32Resource>
     <AssemblyName>CryptPad</AssemblyName>
+    <PackageProjectUrl>https://github.com/ai297/CryptPad-simple</PackageProjectUrl>
+    <Product>CryptPad Simple</Product>
+    <PackageId>CryptPad Simple</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
