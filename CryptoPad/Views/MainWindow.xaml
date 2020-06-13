@@ -6,7 +6,7 @@
         xmlns:prop="clr-namespace:CryptoPad.Properties"
         xmlns:vm="clr-namespace:CryptoPad.ViewModels"
         mc:Ignorable="d"
-        Title="{Binding Title, StringFormat='\{0} - CryptoPad'}" 
+        Title="{Binding Title, StringFormat='\{0} - CryptPad Simple'}" 
         Height="450" Width="800" MinWidth="300" MinHeight="300"
         Closed="Window_Closed"
         Closing="Window_Closing"

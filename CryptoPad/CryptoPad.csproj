@@ -13,6 +13,7 @@
     <Description>Simple text editor with password protection for files</Description>
     <Copyright>Kris Casper 2020</Copyright>
     <Win32Resource></Win32Resource>
+    <AssemblyName>CryptPad</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
