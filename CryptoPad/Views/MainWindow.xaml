@@ -1,0 +1,100 @@
+﻿<Window x:Class="CryptoPad.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:prop="clr-namespace:CryptoPad.Properties"
+        xmlns:vm="clr-namespace:CryptoPad.ViewModels"
+        mc:Ignorable="d"
+        Title="{Binding Title, StringFormat='\{0} - CryptoPad'}" 
+        Height="450" Width="800" MinWidth="300" MinHeight="300"
+        Closed="Window_Closed"
+        Closing="Window_Closing"
+        HorizontalContentAlignment="Stretch" 
+        VerticalContentAlignment="Stretch"
+        SizeToContent="Manual"
+        ResizeMode="CanResizeWithGrip" >
+    <Window.DataContext>
+        <vm:MainWindowModel />
+    </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding Open}" Key="O" Modifiers="Ctrl" />
+        <KeyBinding Command="{Binding Close}" Key="W" Modifiers="Ctrl" />
+        <KeyBinding Command="{Binding New}" Key="N" Modifiers="Ctrl" />
+        <KeyBinding Command="{Binding Save}" Key="S" Modifiers="Ctrl" />
+        <KeyBinding Command="{Binding SaveAs}" Key="S" Modifiers="Ctrl+Shift"/>
+    </Window.InputBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="{StaticResource {x:Static SystemColors.MenuBarBrushKey}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Menu Grid.Column="0" Background="{x:Null}" VerticalAlignment="Center" Margin="5,0,0,0">
+                <MenuItem Header="{x:Static prop:Resources.MenuFile}">
+                    <MenuItem Header="{x:Static prop:Resources.MenuNew}" Command="{Binding New}" InputGestureText="Ctrl+N"/>
+                    <MenuItem Header="{x:Static prop:Resources.MenuOpen}" Command="{Binding Open}" InputGestureText="Ctrl+O"/>
+                    <MenuItem Header="{x:Static prop:Resources.MenuSave}" Command="{Binding Save}" InputGestureText="Ctrl+S"/>
+                    <MenuItem Header="{x:Static prop:Resources.MenuSaveAs}" Command="{Binding SaveAs}" InputGestureText="Ctrl+Shift+S"/>
+                    <Separator />
+                    <MenuItem Name="menuClose" Header="{x:Static prop:Resources.MenuClose}" Command="{Binding Close}" InputGestureText="Ctrl+W"/>
+                </MenuItem>
+                <!--<MenuItem Header="{StaticResource m_Encoding}">
+                    <MenuItem Header="_UTF-8" Command="{Binding ChangeEncoding}" CommandParameter="{Binding EncodingUTF}" IsChecked="{Binding UtfIsChecked, Mode=OneWay}" />
+                    <MenuItem Header="_Cyrillic (1251)" Command="{Binding ChangeEncoding}" CommandParameter="{Binding EncodingANSI}" IsChecked="{Binding AnsiIsChecked, Mode=OneWay}" />
+                </MenuItem>-->
+            </Menu>
+            <StackPanel Grid.Column="1" HorizontalAlignment="Left" Orientation="Horizontal" Margin="22,0,22,0">
+                <Label Content="{x:Static prop:Resources.LabelFont}" ContentStringFormat=" {0}:" />
+                <ComboBox Name="cmbFontFamily" Margin="2" SelectionChanged="cmbFontFamily_SelectionChanged" Width="160"/>
+                <ComboBox Name="cmbFontSize" Margin="2" IsEditable="True" TextBoxBase.TextChanged="cmbFontSize_TextChanged" InputScope="Number" Width="45">
+                    <ComboBoxItem Content="8"/>
+                    <ComboBoxItem Content="10"/>
+                    <ComboBoxItem Content="11"/>
+                    <ComboBoxItem Content="12"/>
+                    <ComboBoxItem Content="14"/>
+                    <ComboBoxItem Content="16"/>
+                    <ComboBoxItem Content="18"/>
+                    <ComboBoxItem Content="20"/>
+                    <ComboBoxItem Content="22"/>
+                    <ComboBoxItem Content="24"/>
+                    <ComboBoxItem Content="26"/>
+                    <ComboBoxItem Content="28"/>
+                    <ComboBoxItem Content="32"/>
+                    <ComboBoxItem Content="36"/>
+                    <ComboBoxItem Content="48"/>
+                    <ComboBoxItem Content="72"/>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Grid.Column="2" HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,0,0,0">
+
+            </StackPanel>
+        </Grid>
+        <TextBox Name="txtEditor" Text="{Binding TextContent, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" TextWrapping="NoWrap" Padding="5" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" AcceptsReturn="True" AcceptsTab="True" />
+        <StatusBar Grid.Row="2">
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="22" />
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+            <StatusBarItem Grid.Column="0" HorizontalContentAlignment="Left" VerticalContentAlignment="Stretch">
+                <TextBlock TextAlignment="Left" Text="{Binding MessageText}" Margin="5,0,0,0" />
+            </StatusBarItem>
+            <StatusBarItem Grid.Column="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <TextBlock TextAlignment="Left" Text="{Binding CurrentEncoding.EncodingName}" />
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>
